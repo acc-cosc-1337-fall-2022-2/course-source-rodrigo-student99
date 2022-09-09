@@ -7,6 +7,7 @@ using std::cin;
 /*
 Call multiply_numbers with 10 and 10 parameter values and display function result
 */
+
 int main()
 {
 	int num;
