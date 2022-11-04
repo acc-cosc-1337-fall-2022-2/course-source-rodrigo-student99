@@ -12,6 +12,14 @@ int main()
 		cout << "\nHello user, would you like to start off as X or O? Type here:";
 		string response;
 		cin >> response;
+
+		//while loop to validate user input
+		while ( (response != "X") && (response != "O"))
+		{
+			cout << "\nUH-OH, seems like that input is not valid! Please enter a capital X or O here:";
+			cin >> response;
+		} 
+		
 		game.start_game(response);
 		bool game_loop_over = false;
 
@@ -32,10 +40,29 @@ int main()
 			game.display_board();
 			if (game.game_over())
 			{
+				string game_end_result = game.get_winner();
+				//cout << "\n" << game_end_result;
+				if (game_end_result == "C")
+				{
+					cout << "\nThe game has ended in a tie!\n";
+				}
+				else
+				{
+					cout << "\nThe winner of the game was " << game_end_result << "\n";
+				}
+				
 				game_loop_over = true;
 				cout << "\nWould you like to exit the game? Type Y/N here:";
 				string respuersta; 
 				cin >> respuersta;
+				
+				while (respuersta != "Y" && respuersta != "N")
+				{
+					cout << "\nPlease type in Y or N as capital letters here:";
+					cin >> respuersta;
+				}
+				
+				
 				if (respuersta == "Y")
 				{
 					has_opted_out = true;
