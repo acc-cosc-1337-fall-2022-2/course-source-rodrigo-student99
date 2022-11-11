@@ -1,7 +1,6 @@
 //h
 #include <vector>
 #include <string>
-//REMEMBER TO REMOVE THIS AS JUST USING STD COUT TO TEST IMPLEMENTATION!!!
 #include <iostream>
 //Must include header file for regular TicTacToe class as that will be used in this class
 #include "tic_tac_toe.h"
