@@ -1,6 +1,7 @@
 //cpp
 #include "tic_tac_toe.h"
-
+//display_board no loneger used as using operator overload!!!
+/*
 void TicTacToe::display_board() 
 {
     
@@ -21,6 +22,7 @@ void TicTacToe::display_board()
 
     cout << "\n";
 }
+*/
 
 void TicTacToe::start_game(string first_player)
 {
@@ -173,4 +175,45 @@ string TicTacToe::get_winner() const
 {
     return winner;
 }
+
+//Friend functions used to overload operators 
+std::ostream& operator<<(std::ostream& out, const TicTacToe& game)
+{
+    int iter = 0;
+    while (iter < game.pegs.size())
+    {
+        if (iter % 3 == 0 || iter % 3 == 1)
+        {
+            out << game.pegs[iter] << " | ";
+            iter +=  1;
+        }
+        else 
+        {
+            out << game.pegs[iter] << "\n";
+            iter +=  1;
+        }
+    }
+
+    out << "\n";
+    return out;
+}
+
+std::istream& operator>>(std::istream& in, TicTacToe& game)
+{
+    int input;
+    cout << "PLAYER please type in a number 1-9:";
+    in >> input;
+
+    while ((input < 1 || input > 9) )
+    {
+        cout << "\nSeems like that was invalid input. Please type in a number between 1-9:";
+        in >> input;
+    }
+
+    game.mark_board(input);
+    
+
+    return in;
+}
+
 

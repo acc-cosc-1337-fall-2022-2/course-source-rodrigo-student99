@@ -12,6 +12,10 @@ using std::cin; using std::cout; using std::vector; using std::string;
 
 class TicTacToe
 {
+//friend functions
+friend std::ostream& operator<<(std::ostream& out, const TicTacToe& game);
+friend std::istream& operator>>(std::istream& in, TicTacToe& game);
+
 //public functions include: bool game_over,void start_game, void mark_board, string get_player and void display_board,void 
 public:
 TicTacToe(): pegs(9,"a"){}
@@ -20,8 +24,10 @@ bool game_over();
 void start_game(string first_player);
 void mark_board(int position);
 string get_player() const;
-void display_board();
 string get_winner() const;
+//void display_board();
+    //display_board not to be used as now using operator overload! 
+
 //personal function added to make process of switching X/Y for checking more staightfoward and less repetitive
 string game_check_player_switcher(string current_player);
 

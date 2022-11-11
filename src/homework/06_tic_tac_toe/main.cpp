@@ -1,9 +1,16 @@
 #include "tic_tac_toe.h"
+#include "tic_tac_toe_manager.h"
 int main() 
 {
-	//initialize game object before game loops
+	//initialize TicTacToe and TicTacToeManager object before game loops
 	TicTacToe game;
+	TicTacToeManager coach;
 	bool has_opted_out = false;
+	
+	//initialize variables to hold number of x wins, y wins, and ties
+	int times_x_won = 0;
+	int times_y_won = 0;
+	int times_game_has_ties = 0;
 
 	//has_opted_out will determine loop if want to keep playing
 	while (has_opted_out == false)
@@ -26,22 +33,15 @@ int main()
 		//core game loop that is run until board is filled up and user then can choose to exit game or start new game
 		while(!game_loop_over)
 		{
-			int input;
-			cout << "\nPLAYER, please type in a number 1-9 or type 999 to exit the game: ";
-			cin >> input;
+			//logic to get response, validate it, and mark_board() all enclosed in TicTacToe >> ops
+			cin >> game;
+			//logic to print out gameboard in TicTacToe << ops
+			cout << game;
 			
-			///gives user option to exit game entirely
-			if (input == 999)
-			{
-				has_opted_out = true;
-				break;
-			}
-			game.mark_board(input);
-			game.display_board();
 			if (game.game_over())
 			{
+				coach.save_game(game);
 				string game_end_result = game.get_winner();
-				//cout << "\n" << game_end_result;
 				if (game_end_result == "C")
 				{
 					cout << "\nThe game has ended in a tie!\n";
@@ -51,6 +51,13 @@ int main()
 					cout << "\nThe winner of the game was " << game_end_result << "\n";
 				}
 				
+				//get private variables of results of game in manager class and print it out
+				coach.get_winner_total(times_x_won, times_y_won, times_game_has_ties);
+				cout << "\nX has won the game " << times_x_won << " times";
+				cout << "\nY has won the game " << times_y_won << " times";
+				cout << "\nThe game has ended in a tie " << times_game_has_ties << " times\n";
+
+
 				game_loop_over = true;
 				cout << "\nWould you like to exit the game? Type Y/N here:";
 				string respuersta; 
@@ -71,6 +78,9 @@ int main()
 			}
 		}
 	}
+	//Here is where we use overloaded operator for manager class to print out results of games played
+	cout << coach;
+
 	cout << "\nthe game has ended :(\n";
 	return 0;
 }
