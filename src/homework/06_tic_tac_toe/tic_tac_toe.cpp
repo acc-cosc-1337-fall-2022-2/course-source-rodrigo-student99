@@ -24,6 +24,11 @@ void TicTacToe::display_board()
 }
 */
 
+TicTacToe::TicTacToe(int size): pegs(size * size, " ")
+{
+    //cout << "we call in an arguement to create a x by x size board with size: " << size << "\n";
+}
+
 void TicTacToe::start_game(string first_player)
 {
     player = first_player;
@@ -32,8 +37,17 @@ void TicTacToe::start_game(string first_player)
 
 void TicTacToe::clear_board()
 {
-    vector<string> reset(9, " ");
-    pegs = reset; 
+    if (pegs.size() == 9)
+    {
+        vector<string> reset(9, " ");
+        pegs = reset; 
+    }
+    else
+    {
+        vector<string> reset(16," ");
+        pegs = reset; 
+    }
+    
 }
 
 void TicTacToe::set_next_player()
@@ -95,50 +109,18 @@ bool TicTacToe::game_over()
 
 bool TicTacToe::check_column_win()
 {
-    string tester;
-    //game_check_player_switcher sets tester to X if player is Y and vice-versa
-    tester = game_check_player_switcher(player);
-
-    bool has_won = false;
-    for (int i = 0; i < 3; i++ )
-    {
-        if (pegs[i] == tester && pegs[i + 3] == tester && pegs[i + 6] == tester)
-        {
-            has_won = true;
-        }
-    }
-    return has_won;
+    return false;
 }
 
 bool TicTacToe::check_row_win()
 {
-    string tester;
-    tester = game_check_player_switcher(player);
-
-    bool has_won = false;
-    for (int j = 0; j < 3; j++)
-    {
-        int temp = j *3;
-        if (pegs[temp] == tester && pegs[temp + 1] == tester && pegs[temp + 2] == tester)
-        {
-            has_won = true;
-        }
-    }
-    return has_won;
+    return false;
 
 }
 
 bool TicTacToe::check_diagonal_win()
 {
-    string tester;
-    tester = game_check_player_switcher(player);
-    bool has_won = false;
-
-    if ((pegs[0] == tester && pegs[4] == tester && pegs[8] == tester) || (pegs[2] == tester && pegs[4] == tester && pegs[6] == tester))
-    {
-        has_won = true;
-    }
-    return has_won;
+   return false;
 }
 
 void TicTacToe::set_winner()
@@ -177,22 +159,49 @@ string TicTacToe::get_winner() const
 }
 
 //Friend functions used to overload operators 
+//do we need to change from refrence to pointer?
 std::ostream& operator<<(std::ostream& out, const TicTacToe& game)
 {
+    //cout << "we are in the outstream function\n";
     int iter = 0;
-    while (iter < game.pegs.size())
+    int game_dimnesion = game.pegs.size();
+    //cout << "game dimension is: " << game_dimnesion << "\n";
+
+    if (game.pegs.size() == 9)
     {
-        if (iter % 3 == 0 || iter % 3 == 1)
+        //out << "the 3x3 game should be printed\n";
+        while (iter < game.pegs.size())
         {
-            out << game.pegs[iter] << " | ";
-            iter +=  1;
-        }
-        else 
-        {
-            out << game.pegs[iter] << "\n";
-            iter +=  1;
-        }
+            if (iter % 3 == 0 || iter % 3 == 1)
+            {
+                out << game.pegs[iter] << " | ";
+                iter +=  1;
+            }
+            else 
+            {
+                out << game.pegs[iter] << "\n";
+                iter +=  1;
+            }
+        }   
     }
+    else if (game.pegs.size() == 16)
+    {
+        //out << "the 4x4 game should be printed\n";
+        while (iter < game.pegs.size())
+        {
+            if (iter % 4 == 0 || iter % 4 == 1 || iter % 4 == 2)
+            {
+                out << game.pegs[iter] << " | ";
+                iter +=  1;
+            }
+            else 
+            {
+                out << game.pegs[iter] << "\n";
+                iter +=  1;
+            }
+        }   
+    }
+    
 
     out << "\n";
     return out;
@@ -201,10 +210,10 @@ std::ostream& operator<<(std::ostream& out, const TicTacToe& game)
 std::istream& operator>>(std::istream& in, TicTacToe& game)
 {
     int input;
-    cout << "PLAYER please type in a number 1-9:";
+    cout << "PLAYER please type in a number :";
     in >> input;
 
-    while ((input < 1 || input > 9) )
+    while ((input < 1 || input > 16) )
     {
         cout << "\nSeems like that was invalid input. Please type in a number between 1-9:";
         in >> input;

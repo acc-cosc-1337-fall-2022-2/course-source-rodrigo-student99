@@ -2,265 +2,545 @@
 #include "catch.hpp"
 #include "tic_tac_toe.h"
 #include "tic_tac_toe_manager.h"
+#include "tic_tac_toe_3.h"
+#include "tic_tac_toe_4.h"
+
+
 TEST_CASE("Verify Test Configuration", "verification") {
 	REQUIRE(true == true);
 }
 
-TEST_CASE("Verify first player set to X")
+
+TEST_CASE("Verify first player set to X in 3x3")
 {
-	TicTacToe juego;
-	juego.start_game("X");
-	REQUIRE(juego.get_player() == "X");
+	std::unique_ptr<TicTacToe> juego = std::make_unique<TicTacToe3>();
+	juego->start_game("X");
+	REQUIRE(juego->get_player() == "X");
 }
 
-TEST_CASE("Verify first player set to O")
+TEST_CASE("Verify first player set to O in 3x3")
 {
-	TicTacToe juego;
-	juego.start_game("O");
-	REQUIRE(juego.get_player() == "O");
+	std::unique_ptr<TicTacToe> juego = std::make_unique<TicTacToe3>();
+	juego->start_game("O");
+	REQUIRE(juego->get_player() == "O");
 }
 
 //NOTE: NEED TO MAKE SURE NO WIN CONDITIONS BEFORE CAT **AND RETURNS C!
 TEST_CASE("Verify TicTacToe Game is working")
 {
-	TicTacToe juego;
-	juego.start_game("X");
-	juego.mark_board(2);
-	REQUIRE(juego.game_over() == false);
-	juego.mark_board(1);
-	REQUIRE(juego.game_over() == false);
-	juego.mark_board(3);
-	REQUIRE(juego.game_over() == false);
-	juego.mark_board(5);
-	REQUIRE(juego.game_over() == false);
-	juego.mark_board(4);
-	REQUIRE(juego.game_over() == false);
-	juego.mark_board(6);
-	REQUIRE(juego.game_over() == false);
-	juego.mark_board(7);
-	REQUIRE(juego.game_over() == false);
-	juego.mark_board(8);
-	REQUIRE(juego.game_over() == false);
-	juego.mark_board(9);
-	juego.game_over();
-	REQUIRE(juego.get_winner() == "C");
+	std::unique_ptr<TicTacToe> juego = std::make_unique<TicTacToe3>();
+	juego->start_game("X");
+	juego->mark_board(2);
+	REQUIRE(juego->game_over() == false);
+	juego->mark_board(1);
+	REQUIRE(juego->game_over() == false);
+	juego->mark_board(3);
+	REQUIRE(juego->game_over() == false);
+	juego->mark_board(5);
+	REQUIRE(juego->game_over() == false);
+	juego->mark_board(4);
+	REQUIRE(juego->game_over() == false);
+	juego->mark_board(6);
+	REQUIRE(juego->game_over() == false);
+	juego->mark_board(7);
+	REQUIRE(juego->game_over() == false);
+	juego->mark_board(8);
+	REQUIRE(juego->game_over() == false);
+	juego->mark_board(9);
+	juego->game_over();
+	REQUIRE(juego->get_winner() == "C");
 }
 
 TEST_CASE("Verify that can win game by getting full 1st column")
 {
-	TicTacToe jogo;
-	jogo.start_game("X");
-	jogo.mark_board(1);
-	REQUIRE(jogo.game_over() == false);
-	jogo.mark_board(6);
-	REQUIRE(jogo.game_over() == false);
-	jogo.mark_board(4);
-	REQUIRE(jogo.game_over() == false);
-	jogo.mark_board(2);
-	REQUIRE(jogo.game_over() == false);
-	jogo.mark_board(7);
-	REQUIRE(jogo.game_over() == true);
-	REQUIRE(jogo.get_winner() == "X");
+	std::unique_ptr<TicTacToe> jogo = std::make_unique<TicTacToe3>();
+	jogo->start_game("X");
+	jogo->mark_board(1);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(6);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(4);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(2);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(7);
+	REQUIRE(jogo->game_over() == true);
+	REQUIRE(jogo->get_winner() == "X");
 }
 
 TEST_CASE("Verify that can win game by getting full 2nd column")
 {
-	TicTacToe jogo;
-	jogo.start_game("X");
-	jogo.mark_board(2);
-	REQUIRE(jogo.game_over() == false);
-	jogo.mark_board(6);
-	REQUIRE(jogo.game_over() == false);
-	jogo.mark_board(5);
-	REQUIRE(jogo.game_over() == false);
-	jogo.mark_board(3);
-	REQUIRE(jogo.game_over() == false);
-	jogo.mark_board(8);
-	REQUIRE(jogo.game_over() == true);
-	REQUIRE(jogo.get_winner() == "X");
+	std::unique_ptr<TicTacToe> jogo = std::make_unique<TicTacToe3>();
+	jogo->start_game("X");
+	jogo->mark_board(2);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(6);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(5);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(3);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(8);
+	REQUIRE(jogo->game_over() == true);
+	REQUIRE(jogo->get_winner() == "X");
 }
 
 TEST_CASE("Verify can win game by getting full 3rd column")
 {
-	TicTacToe jogo;
-	jogo.start_game("X");
-	jogo.mark_board(3);
-	REQUIRE(jogo.game_over() == false);
-	jogo.mark_board(5);
-	REQUIRE(jogo.game_over() == false);
-	jogo.mark_board(6);
-	REQUIRE(jogo.game_over() == false);
-	jogo.mark_board(1);
-	REQUIRE(jogo.game_over() == false);
-	jogo.mark_board(9);
-	REQUIRE(jogo.game_over() == true);
-	REQUIRE(jogo.get_winner() == "X");
+	std::unique_ptr<TicTacToe> jogo = std::make_unique<TicTacToe3>();
+	jogo->start_game("X");
+	jogo->mark_board(3);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(5);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(6);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(1);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(9);
+	REQUIRE(jogo->game_over() == true);
+	REQUIRE(jogo->get_winner() == "X");
 
 }
 
 TEST_CASE("Verify can win game by getting full first row")
 {
-	TicTacToe jogo;
-	jogo.start_game("X");
-	jogo.mark_board(1);
-	REQUIRE(jogo.game_over() == false);
-	jogo.mark_board(5);
-	REQUIRE(jogo.game_over() == false);
-	jogo.mark_board(2);
-	REQUIRE(jogo.game_over() == false);
-	jogo.mark_board(9);
-	REQUIRE(jogo.game_over() == false);
-	jogo.mark_board(3);
-	REQUIRE(jogo.game_over() == true);
-	REQUIRE(jogo.get_winner() == "X");
+	std::unique_ptr<TicTacToe> jogo = std::make_unique<TicTacToe3>();
+	jogo->start_game("X");
+	jogo->mark_board(1);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(5);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(2);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(9);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(3);
+	REQUIRE(jogo->game_over() == true);
+	REQUIRE(jogo->get_winner() == "X");
 }
 
 TEST_CASE("Verofy can win game by getting full second row")
 {
-	TicTacToe jogo;
-	jogo.start_game("X");
-	jogo.mark_board(4);
-	REQUIRE(jogo.game_over() == false);
-	jogo.mark_board(2);
-	REQUIRE(jogo.game_over() == false);
-	jogo.mark_board(5);
-	REQUIRE(jogo.game_over() == false);
-	jogo.mark_board(1);
-	REQUIRE(jogo.game_over() == false);
-	jogo.mark_board(6);
-	REQUIRE(jogo.game_over() == true);
-	REQUIRE(jogo.get_winner() == "X");
+	std::unique_ptr<TicTacToe> jogo = std::make_unique<TicTacToe3>();
+	jogo->start_game("X");
+	jogo->mark_board(4);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(2);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(5);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(1);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(6);
+	REQUIRE(jogo->game_over() == true);
+	REQUIRE(jogo->get_winner() == "X");
 }
 
 TEST_CASE("Verify can win game by getting full third row")
 {
-	TicTacToe jogo;
-	jogo.start_game("X");
-	jogo.mark_board(7);
-	REQUIRE(jogo.game_over() == false);
-	jogo.mark_board(5);
-	REQUIRE(jogo.game_over() == false);
-	jogo.mark_board(8);
-	REQUIRE(jogo.game_over() == false);
-	jogo.mark_board(1);
-	REQUIRE(jogo.game_over() == false);
-	jogo.mark_board(9);
-	REQUIRE(jogo.game_over() == true);
-	REQUIRE(jogo.get_winner() == "X");
+	std::unique_ptr<TicTacToe> jogo = std::make_unique<TicTacToe3>();
+	jogo->start_game("X");
+	jogo->mark_board(7);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(5);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(8);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(1);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(9);
+	REQUIRE(jogo->game_over() == true);
+	REQUIRE(jogo->get_winner() == "X");
 }
 
 
 TEST_CASE("Verify can win game by getting full diagonal from top left")
 {
-	TicTacToe jogo;
-	jogo.start_game("X");
-	jogo.mark_board(1);
-	REQUIRE(jogo.game_over() == false);
-	jogo.mark_board(2);
-	REQUIRE(jogo.game_over() == false);
-	jogo.mark_board(5);
-	REQUIRE(jogo.game_over() == false);
-	jogo.mark_board(3);
-	REQUIRE(jogo.game_over() == false);
-	jogo.mark_board(9);
-	REQUIRE(jogo.game_over() == true);
-	REQUIRE(jogo.get_winner() == "X");
+	std::unique_ptr<TicTacToe> jogo = std::make_unique<TicTacToe3>();
+	jogo->start_game("X");
+	jogo->mark_board(1);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(2);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(5);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(3);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(9);
+	REQUIRE(jogo->game_over() == true);
+	REQUIRE(jogo->get_winner() == "X");
 }
 
 TEST_CASE("Verify can win game by getting full diagonal from top right")
 {
-	TicTacToe jogo;
-	jogo.start_game("X");
-	jogo.mark_board(3);
-	REQUIRE(jogo.game_over() == false);
-	jogo.mark_board(2);
-	REQUIRE(jogo.game_over() == false);
-	jogo.mark_board(5);
-	REQUIRE(jogo.game_over() == false);
-	jogo.mark_board(4);
-	REQUIRE(jogo.game_over() == false);
-	jogo.mark_board(7);
-	REQUIRE(jogo.game_over() == true);
-	REQUIRE(jogo.get_winner() == "X");
+	std::unique_ptr<TicTacToe> jogo = std::make_unique<TicTacToe3>();
+	jogo->start_game("X");
+	jogo->mark_board(3);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(2);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(5);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(4);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(7);
+	REQUIRE(jogo->game_over() == true);
+	REQUIRE(jogo->get_winner() == "X");
 }
 
-TEST_CASE("Verify that TicTacToeManager is working")
+
+TEST_CASE("Verify TicTacToe 4x4 can start with X")
 {
-	//This is the one instance of TicTacToeManager class that is used across 3 instances of TicTacToe
+	std::unique_ptr<TicTacToe> juego = std::make_unique<TicTacToe4>();
+	juego->start_game("X");
+	REQUIRE(juego->get_player() == "X");
+}
+
+TEST_CASE("Verify TicTacToe 4x4 can start with O")
+{
+	std::unique_ptr<TicTacToe> juego = std::make_unique<TicTacToe4>();
+	juego->start_game("O");
+	REQUIRE(juego->get_player() == "O");
+}
+
+TEST_CASE("Verify can win game by getting full first row in 4x4")
+{
+	std::unique_ptr<TicTacToe> jogo = std::make_unique<TicTacToe4>();
+	jogo->start_game("X");
+	jogo->mark_board(1);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(5);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(2);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(9);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(3);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(13);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(4);
+	REQUIRE(jogo->game_over() == true);
+	REQUIRE(jogo->get_winner() == "X");
+}
+
+TEST_CASE("Verify can win game by getting full second row in 4x4")
+{
+	std::unique_ptr<TicTacToe> jogo = std::make_unique<TicTacToe4>();
+	jogo->start_game("X");
+	jogo->mark_board(5);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(12);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(6);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(9);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(7);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(13);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(8);
+	REQUIRE(jogo->game_over() == true);
+	REQUIRE(jogo->get_winner() == "X");
+}
+
+TEST_CASE("Verify can win game by getting full third row in 4x4")
+{
+	std::unique_ptr<TicTacToe> jogo = std::make_unique<TicTacToe4>();
+	jogo->start_game("X");
+	jogo->mark_board(9);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(1);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(10);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(13);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(11);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(14);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(12);
+	REQUIRE(jogo->game_over() == true);
+	REQUIRE(jogo->get_winner() == "X");
+}
+
+TEST_CASE("Verify can win game by getting full fourth row in 4x4")
+{
+	std::unique_ptr<TicTacToe> jogo = std::make_unique<TicTacToe4>();
+	jogo->start_game("X");
+	jogo->mark_board(13);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(8);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(14);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(9);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(15);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(2);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(16);
+	REQUIRE(jogo->game_over() == true);
+	REQUIRE(jogo->get_winner() == "X");
+}
+
+TEST_CASE("Verify can win game by getting full first column in 4x4")
+{
+	std::unique_ptr<TicTacToe> jogo = std::make_unique<TicTacToe4>();
+	jogo->start_game("X");
+	jogo->mark_board(1);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(8);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(5);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(3);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(9);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(2);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(13);
+	REQUIRE(jogo->game_over() == true);
+	REQUIRE(jogo->get_winner() == "X");
+}
+
+TEST_CASE("Verify can win game by getting full second column in 4x4")
+{
+	std::unique_ptr<TicTacToe> jogo = std::make_unique<TicTacToe4>();
+	jogo->start_game("X");
+	jogo->mark_board(2);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(8);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(6);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(9);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(10);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(3);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(14);
+	REQUIRE(jogo->game_over() == true);
+	REQUIRE(jogo->get_winner() == "X");
+}
+
+TEST_CASE("Verify can win game by getting full third column in 4x4")
+{
+	std::unique_ptr<TicTacToe> jogo = std::make_unique<TicTacToe4>();
+	jogo->start_game("X");
+	jogo->mark_board(3);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(8);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(7);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(9);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(11);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(2);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(15);
+	REQUIRE(jogo->game_over() == true);
+	REQUIRE(jogo->get_winner() == "X");
+}
+
+TEST_CASE("Verify can win game by getting full fourth column in 4x4")
+{
+	std::unique_ptr<TicTacToe> jogo = std::make_unique<TicTacToe4>();
+	jogo->start_game("X");
+	jogo->mark_board(4);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(1);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(8);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(9);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(12);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(2);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(16);
+	REQUIRE(jogo->game_over() == true);
+	REQUIRE(jogo->get_winner() == "X");
+}
+
+TEST_CASE("Verify can win game by getting top left to bottom right diagonal in 4x4")
+{
+	std::unique_ptr<TicTacToe> jogo = std::make_unique<TicTacToe4>();
+	jogo->start_game("X");
+	jogo->mark_board(1);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(2);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(6);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(9);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(11);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(3);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(16);
+	REQUIRE(jogo->game_over() == true);
+	REQUIRE(jogo->get_winner() == "X");
+}
+
+TEST_CASE("Verify can win game by getting top right to bottom left diagonal in 4x4")
+{
+	std::unique_ptr<TicTacToe> jogo = std::make_unique<TicTacToe4>();
+	jogo->start_game("X");
+	jogo->mark_board(4);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(2);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(7);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(9);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(10);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(3);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(13);
+	REQUIRE(jogo->game_over() == true);
+	REQUIRE(jogo->get_winner() == "X");
+}
+
+TEST_CASE("Verify that we can have tied 4x4 game")
+{
+	std::unique_ptr<TicTacToe> jogo = std::make_unique<TicTacToe4>();
+	jogo = std::make_unique<TicTacToe4>();
+	jogo->start_game("O");
+	jogo->mark_board(1);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(2);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(3);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(4);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(5);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(6);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(7);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(8);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(9);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(10);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(11);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(12);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(14);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(13);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(16);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(15);
+	REQUIRE(jogo->game_over() == true);
+	REQUIRE(jogo->get_winner() == "C");
+}
+
+TEST_CASE("Verify that TicTacToe Manager works across multiple games of types 3x3 and 4x4")
+{
 	TicTacToeManager coach;
 	
-	//These are variables necesscary to test whether correct # of wins b/w x & o and ties
-	int x = 0;
-	int o = 0;
-	int t = 0;
-	//First instance of TicTacToe to test if TTTManager records when x wins
-	TicTacToe jogo;
-	jogo.start_game("X");
-	jogo.mark_board(3);
-	REQUIRE(jogo.game_over() == false);
-	jogo.mark_board(2);
-	REQUIRE(jogo.game_over() == false);
-	jogo.mark_board(5);
-	REQUIRE(jogo.game_over() == false);
-	jogo.mark_board(4);
-	REQUIRE(jogo.game_over() == false);
-	jogo.mark_board(7);
-	REQUIRE(jogo.game_over() == true);
+	//X is winner of 4x4 game
+	std::unique_ptr<TicTacToe> jogo = std::make_unique<TicTacToe4>();
+	jogo->start_game("X");
+	jogo->mark_board(4);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(2);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(7);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(9);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(10);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(3);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(13);
+	REQUIRE(jogo->game_over() == true);
+
 	coach.save_game(jogo);
-	coach.get_winner_total(x,o,t);
-	REQUIRE(jogo.get_winner() == "X");
-	//we are testing wheter manager class has just recorded x win in its private variable
-	REQUIRE(x == 1);
-	REQUIRE(o == 0);
-	REQUIRE(t == 0);
 
-	//now testing whether manager class can record a o win in its private variable
-	jogo.start_game("O");
-	jogo.mark_board(3);
-	REQUIRE(jogo.game_over() == false);
-	jogo.mark_board(2);
-	REQUIRE(jogo.game_over() == false);
-	jogo.mark_board(5);
-	REQUIRE(jogo.game_over() == false);
-	jogo.mark_board(4);
-	REQUIRE(jogo.game_over() == false);
-	jogo.mark_board(7);
-	REQUIRE(jogo.game_over() == true);
+	//O is winner of 3x3 game
+	jogo = std::make_unique<TicTacToe3>();
+	jogo->start_game("O");
+	jogo->mark_board(3);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(2);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(5);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(4);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(7);
+	REQUIRE(jogo->game_over() == true);
+	REQUIRE(jogo->get_winner() == "O");
+
 	coach.save_game(jogo);
-	coach.get_winner_total(x,o,t);
-	REQUIRE(jogo.get_winner() == "O");
-	REQUIRE(x == 1);
-	REQUIRE(o == 1);
-	REQUIRE(t == 0);
 
-	//Now lets test if the TicTacToeManager class can work across diffrent instances of TicTacToe classes
-	TicTacToe juego;
-	juego.start_game("O");
-	juego.mark_board(1);
-	REQUIRE(juego.game_over() == false);
-	juego.mark_board(2);
-	REQUIRE(juego.game_over() == false);
-	juego.mark_board(4);
-	REQUIRE(juego.game_over() == false);
-	juego.mark_board(5);
-	REQUIRE(juego.game_over() == false);
-	juego.mark_board(8);
-	REQUIRE(juego.game_over() == false);
-	juego.mark_board(7);
-	REQUIRE(juego.game_over() == false);
-	juego.mark_board(3);
-	REQUIRE(juego.game_over() == false);
-	juego.mark_board(6);
-	REQUIRE(juego.game_over() == false);
-	juego.mark_board(9);
-	REQUIRE(juego.game_over() == true);
-	coach.save_game(juego);
-	coach.get_winner_total(x,o,t);
-	//in the TicTacToe class, "C" indicates a tie
-	REQUIRE(juego.get_winner() == "C");
-	REQUIRE(x == 1);
-	REQUIRE(o == 1);
-	REQUIRE(t == 1);
-	
+	//we will have a tied 4x4 game
+	jogo = std::make_unique<TicTacToe4>();
+	jogo->start_game("O");
+	jogo->mark_board(1);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(2);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(3);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(4);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(5);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(6);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(7);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(8);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(9);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(10);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(11);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(12);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(14);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(13);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(16);
+	REQUIRE(jogo->game_over() == false);
+	jogo->mark_board(15);
+	REQUIRE(jogo->game_over() == true);
+	REQUIRE(jogo->get_winner() == "C");
+	coach.save_game(jogo);
 
+	//set up variables to see if correct number of each result is saved
+	int x_wins = 0;
+	int o_wins = 0;
+	int c_wins = 0;
+	coach.get_winner_total(x_wins,o_wins,c_wins);
+	REQUIRE(x_wins == 1);
+	REQUIRE(o_wins == 1);
+	REQUIRE(c_wins == 1);
 }
+
+

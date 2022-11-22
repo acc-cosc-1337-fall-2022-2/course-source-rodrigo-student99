@@ -9,7 +9,23 @@ Win by column if and return true if
 else
 false
 */
+bool TicTacToe3::check_column_win()
+{
+    string tester;
+    //game_check_player_switcher sets tester to X if player is Y and vice-versa
+    tester = game_check_player_switcher(player);
 
+    bool has_won = false;
+    for (int i = 0; i < 3; i++ )
+    {
+        if (pegs[i] == tester && pegs[i + 3] == tester && pegs[i + 6] == tester)
+        {
+            has_won = true;
+        }
+    }
+    //cout <<"we check for column win\n";
+    return has_won;
+}
 
 
 /*
@@ -19,7 +35,24 @@ Win by row if
 3,4,5 are equal
 6,7,8 are equal
 */
+bool TicTacToe3::check_row_win()
+{
+    string tester;
+    tester = game_check_player_switcher(player);
 
+    bool has_won = false;
+    for (int j = 0; j < 3; j++)
+    {
+        int temp = j *3;
+        if (pegs[temp] == tester && pegs[temp + 1] == tester && pegs[temp + 2] == tester)
+        {
+            has_won = true;
+        }
+    }
+    //cout <<"we check for row win\n";
+    return has_won;
+
+}
 
 
 /*
@@ -30,3 +63,21 @@ Win diagonally
 6 7 8
 
 */
+
+bool TicTacToe3::check_diagonal_win()
+{
+    string tester;
+    tester = game_check_player_switcher(player);
+    bool has_won = false;
+
+    if ((pegs[0] == tester && pegs[4] == tester && pegs[8] == tester) || (pegs[2] == tester && pegs[4] == tester && pegs[6] == tester))
+    {
+        has_won = true;
+    }
+    return has_won;
+}
+
+TicTacToe3::TicTacToe3(): TicTacToe(3)
+{
+    //cout << "we call the constructor ttt3 class to create a 3x3 game\n";
+}

@@ -1,12 +1,21 @@
 #include "tic_tac_toe.h"
 #include "tic_tac_toe_manager.h"
+#include "tic_tac_toe_4.h"
+#include "tic_tac_toe_3.h"
+
+#include <memory>
+using std::unique_ptr; using std::make_unique;
 int main() 
 {
 	//initialize TicTacToe and TicTacToeManager object before game loops
-	TicTacToe game;
+	unique_ptr<TicTacToe> game;
 	TicTacToeManager coach;
 	bool has_opted_out = false;
 	
+	//Logic to set up superclass pointer to point to correct instance of 3x3 or 4x4 game class
+	
+
+
 	//initialize variables to hold number of x wins, y wins, and ties
 	int times_x_won = 0;
 	int times_y_won = 0;
@@ -15,6 +24,26 @@ int main()
 	//has_opted_out will determine loop if want to keep playing
 	while (has_opted_out == false)
 	{
+		int game_type;
+		cout << "Hello Player, type 3 if you want to play a 3x3 game or type 4 if want 4x4 game here: ";
+		cin >> game_type;
+
+		do
+		{
+			if (game_type == 3)
+			{
+				//cout << "we make 3x3 class in heap here\n";
+				game = make_unique<TicTacToe3>();
+			}
+			else if (game_type == 4)
+			{
+				//cout << "we make 4x4 class in heap here\n";
+				game = make_unique<TicTacToe4>();
+			}
+		}while(game_type != 3 && game_type != 4);
+		
+		
+		
 		//necesscary pre-game code ran once before core game loop
 		cout << "\nHello user, would you like to start off as X or O? Type here:";
 		string response;
@@ -27,21 +56,22 @@ int main()
 			cin >> response;
 		} 
 		
-		game.start_game(response);
+		game->start_game(response);
 		bool game_loop_over = false;
 
 		//core game loop that is run until board is filled up and user then can choose to exit game or start new game
 		while(!game_loop_over)
 		{
 			//logic to get response, validate it, and mark_board() all enclosed in TicTacToe >> ops
-			cin >> game;
+			cin >> *game;
 			//logic to print out gameboard in TicTacToe << ops
-			cout << game;
+			cout << *game;
 			
-			if (game.game_over())
+			if (game->game_over())
 			{
+				
+				string game_end_result = game->get_winner();
 				coach.save_game(game);
-				string game_end_result = game.get_winner();
 				if (game_end_result == "C")
 				{
 					cout << "\nThe game has ended in a tie!\n";

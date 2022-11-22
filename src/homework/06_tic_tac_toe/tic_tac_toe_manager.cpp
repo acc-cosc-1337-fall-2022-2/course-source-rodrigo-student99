@@ -18,11 +18,12 @@ void TicTacToeManager::update_winner_count(string winner)
     }
 }
 
-void TicTacToeManager::save_game(TicTacToe b)
+void TicTacToeManager::save_game(std::unique_ptr<TicTacToe>& b)
 {
-    games.push_back(b);
-    string current_winner = b.get_winner();
-    update_winner_count(current_winner);
+    //cout << "we run save game manager function\n";
+    update_winner_count(b->get_winner());
+    games.push_back(std::move(b));
+    //cout << "we exit save game manager function\n";
     /*
     cout << "\nNumber of x wins is: " << x_win;
     cout << "\nNumber of o wins is: " << o_win;
@@ -40,13 +41,11 @@ void TicTacToeManager::get_winner_total(int& x_games_won, int& o_games_won, int&
 
 std::ostream& operator<<(std::ostream& out, const TicTacToeManager& manager)
 {
-    //game_num tracks result of each number game to make clear to player and make it easier to check for errors
-    int game_num = 1;
-    for (TicTacToe instance: manager.games)
+    for(int i=0; i < manager.games.size(); i++)
     {
-        cout << "\nThis is the result of game number: " << game_num << "\n";
-        cout << instance;
-        game_num += 1;
+        auto& game = manager.games[i];
+
+        out << "Game " << i+1 << "\n" << *game << "\n";
     }
 
     return out;
