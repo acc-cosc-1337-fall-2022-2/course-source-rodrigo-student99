@@ -85,8 +85,9 @@ bool TicTacToe4::check_diagonal_win()
     //cout << "we check for a diagonal win\n";
     return has_won;
 }
-
+/*
 TicTacToe4::TicTacToe4(): TicTacToe(4)
 {
     //cout << "we call ttt4 with arguement of 4 to create a 4x4 game\n";
 }
+*/

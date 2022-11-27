@@ -4,6 +4,7 @@
 #include "tic_tac_toe_manager.h"
 #include "tic_tac_toe_3.h"
 #include "tic_tac_toe_4.h"
+#include "tic_tac_toe_data"
 
 
 TEST_CASE("Verify Test Configuration", "verification") {

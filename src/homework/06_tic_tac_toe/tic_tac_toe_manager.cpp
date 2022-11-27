@@ -50,3 +50,11 @@ std::ostream& operator<<(std::ostream& out, const TicTacToeManager& manager)
 
     return out;
 }
+
+TicTacToeManager::TicTacToeManager(TicTacToeData& d):dados(d) {
+    games = move(dados.get_games());    
+}
+
+TicTacToeManager::~TicTacToeManager() {
+    dados.save_games(games);
+}

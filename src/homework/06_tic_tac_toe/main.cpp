@@ -9,8 +9,11 @@ int main()
 {
 	//initialize TicTacToe and TicTacToeManager object before game loops
 	unique_ptr<TicTacToe> game;
-	TicTacToeManager coach;
+	TicTacToeData info;
+	TicTacToeManager coach(info);
 	bool has_opted_out = false;
+
+	
 	
 	//Logic to set up superclass pointer to point to correct instance of 3x3 or 4x4 game class
 	
@@ -33,12 +36,14 @@ int main()
 			if (game_type == 3)
 			{
 				//cout << "we make 3x3 class in heap here\n";
-				game = make_unique<TicTacToe3>();
+				vector<string> gameboard(9, " ");
+				game = make_unique<TicTacToe3>(gameboard, "");
 			}
 			else if (game_type == 4)
 			{
 				//cout << "we make 4x4 class in heap here\n";
-				game = make_unique<TicTacToe4>();
+				vector<string> gameboard(16, " ");
+				game = make_unique<TicTacToe4>(gameboard, "");
 			}
 		}while(game_type != 3 && game_type != 4);
 		

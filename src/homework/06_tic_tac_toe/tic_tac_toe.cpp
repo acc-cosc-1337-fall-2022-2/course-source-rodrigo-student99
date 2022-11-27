@@ -24,9 +24,9 @@ void TicTacToe::display_board()
 }
 */
 
-TicTacToe::TicTacToe(int size): pegs(size * size, " ")
+TicTacToe::TicTacToe(vector<string> p, string win): pegs(p)
 {
-    //cout << "we call in an arguement to create a x by x size board with size: " << size << "\n";
+    winner = win;
 }
 
 void TicTacToe::start_game(string first_player)
@@ -223,6 +223,10 @@ std::istream& operator>>(std::istream& in, TicTacToe& game)
     
 
     return in;
+}
+
+vector<string> TicTacToe::get_pegs() const {
+    return pegs;
 }
 
 

@@ -19,7 +19,7 @@ friend std::istream& operator>>(std::istream& in, TicTacToe& game);
 //public functions include: bool game_over,void start_game, void mark_board, string get_player and void display_board,void 
 public:
 //Now have to call TicTacToe with specific size so can 3x3 or 4x4 games
-TicTacToe(int size);
+TicTacToe(vector<string> p, string win);
 
 bool game_over();
 void start_game(string first_player);
@@ -31,6 +31,7 @@ string get_winner() const;
 
 //personal function added to make process of switching X/Y for checking more staightfoward and less repetitive
 string game_check_player_switcher(string current_player);
+std::vector<std::string> get_pegs() const;
 
 protected: 
 //protected variables
@@ -43,6 +44,7 @@ virtual bool check_diagonal_win();
 private: //private functions and data include:set_next_player, bool check_board_full and void clear_board 
 //private variables
 string winner;
+
 
 //private functions
 void set_next_player();

@@ -76,8 +76,8 @@ bool TicTacToe3::check_diagonal_win()
     }
     return has_won;
 }
-
-TicTacToe3::TicTacToe3(): TicTacToe(3)
+/*
+TicTacToe3::TicTacToe3(): TicTacToe(3, )
 {
     //cout << "we call the constructor ttt3 class to create a 3x3 game\n";
-}
+*/
